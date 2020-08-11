@@ -8,7 +8,12 @@ use Illuminate\Support\Facades\Http;
 class OpenWeatherMapService
 {
     protected $apiBaseUrl = 'http://api.openweathermap.org/data/2.5';
-    protected $appId = '62556cb094f086b5396c6f306f8b24aa';
+    protected $appId;
+
+    public function __construct()
+    {
+        $this->appId = env('OPEN_WEATHER_MAP_APPID');
+    }
 
     public function getByCityID($id)
     {

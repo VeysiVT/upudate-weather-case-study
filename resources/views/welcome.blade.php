@@ -108,14 +108,16 @@
                     container.html('<p class="text-center"><i class="fa fa-circle-o-notch fa-spin fa-3x"></i></p>');
                 },
                 success: function (data) {
-                    let date = new Date(),
-                        hour = date.getUTCHours() + (data.timezone / 3600),
-                        second = date.getUTCMinutes(),
-                        weather = weatherArray[data.weather[0].main];
-
-                    if (data.id === undefined) {
+                    if (data.cod == 401) {
+                        container.html('<p class="text-center">' + data.message + '</p>');
+                    } else if (data.cod == 400) {
                         container.html('<p class="text-center">Please choose city!</p>');
                     } else {
+                        let date = new Date(),
+                            hour = date.getUTCHours() + (data.timezone / 3600),
+                            second = date.getUTCMinutes(),
+                            weather = weatherArray[data.weather[0].main];
+
                         container.html('' +
                             '<div class="card ' + weather.class + '">\n' +
                             '   <div class="card-body pb-0">\n' +
